@@ -1,7 +1,7 @@
-#include <iostream>
+#include "Core/Engine.hpp"
 
 int main(int argc, char* argv[])
 {
-    std::cout << "Hello World!" << std::endl;
-    return 0;
+  Engine engine;
+  engine.boot();
 }

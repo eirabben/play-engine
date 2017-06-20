@@ -24,8 +24,8 @@ void Window::create(int width, int height, std::string title)
   glfwGetFramebufferSize(mWindow, &bufferWidth, &bufferHeight);
   glViewport(0, 0, bufferWidth, bufferHeight);
 
-  glEnable(GL_DEPTH_TEST);
-  glDepthFunc(GL_LESS);
+  // glEnable(GL_DEPTH_TEST);
+  // glDepthFunc(GL_LESS);
 }
 
 void Window::swapBuffers()

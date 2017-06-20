@@ -29,7 +29,7 @@ void Engine::boot()
   mWindow.create(1280, 720, "PlayEngine");
   // mWindow.setWindowUserPointer(mGame);
 
-  // mGame.load();
+  mGame.load();
 
   loop();
 }
@@ -49,10 +49,10 @@ void Engine::loop()
     glfwPollEvents();
     while (lag >= msPerUpdate)
     {
-      // mGame.update(msPerUpdate);
+      mGame.update(msPerUpdate);
       lag -= msPerUpdate;
     }
-    // mGame.draw();
+    mGame.draw();
     mWindow.swapBuffers();
   }
 
@@ -61,7 +61,7 @@ void Engine::loop()
 
 void Engine::shutdown()
 {
-  // mGame.quit();
+  mGame.quit();
   mWindow.destroy();
   glfwTerminate();
 }

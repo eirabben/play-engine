@@ -1,5 +1,6 @@
-#pragma once_flag
+#pragma once
 #include "Window.hpp"
+#include "Game.hpp"
 
 class Engine
 {
@@ -10,6 +11,6 @@ public:
 
 private:
   Window mWindow;
-  // Game mGame;
+  Game mGame;
 
 };

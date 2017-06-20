@@ -12,6 +12,8 @@ add_executable(engine
   src/main.cpp
   src/Core/Engine.cpp
   src/Core/Window.cpp
+  src/Core/Game.cpp
+  src/Graphics/Shader.cpp
 )
 
 target_include_directories(engine PUBLIC ${CMAKE_SOURCE_DIR}/lib/include)

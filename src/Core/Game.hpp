@@ -1,5 +1,6 @@
 #pragma once
 #include "../Graphics/Shader.hpp"
+#include "../Graphics/Renderer.hpp"
 
 class Game
 {
@@ -13,7 +14,7 @@ public:
 
 private:
   Shader mShader;
-  unsigned int vao;
-  unsigned int vbo;
+  Renderer mRenderer;
+  Model model;
 
 };

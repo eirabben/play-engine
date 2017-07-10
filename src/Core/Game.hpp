@@ -18,6 +18,6 @@ private:
   Shader mShader;
   Renderer mRenderer;
   Model mModel;
-  Texture texture;
+  Texture mTexture;
 
 };

@@ -1,4 +1,5 @@
 #include "TextureLoader.hpp"
+#include <iostream>
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 #define GLFW_INCLUDE_GLCOREARB
@@ -25,13 +26,12 @@ Texture TextureLoader::loadTexture(std::string path)
   }
   else
   {
-    // Error loading image
+    std::cout << "Error loading texture: " << path << "\n";
   }
 
   stbi_image_free(data);
 
   Texture t;
   t.init(texture);
-
   return t;
 }

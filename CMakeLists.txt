@@ -14,7 +14,8 @@ add_executable(engine
   src/Core/Window.cpp
   src/Core/Game.cpp
   src/Graphics/Shader.cpp
-  src/Graphics/ModelLoader.cpp
+  src/Graphics/MeshLoader.cpp
+  src/Graphics/Mesh.cpp
   src/Graphics/Model.cpp
   src/Graphics/Renderer.cpp
   src/Graphics/Texture.cpp

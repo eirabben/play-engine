@@ -1,8 +1,8 @@
-#include "ModelLoader.hpp"
+#include "MeshLoader.hpp"
 #define GLFW_INCLUDE_GLCOREARB
 #include <GLFW/glfw3.h>
 
-Model ModelLoader::loadModel(std::vector<float> vertices, std::vector<unsigned int> indices)
+Mesh MeshLoader::loadMesh(std::vector<float> vertices, std::vector<unsigned int> indices)
 {
   unsigned int vao, vbo, ebo;
 
@@ -31,7 +31,7 @@ Model ModelLoader::loadModel(std::vector<float> vertices, std::vector<unsigned i
 
   glBindVertexArray(0);
 
-  Model model;
-  model.init(vao);
-  return model;
+  Mesh mesh;
+  mesh.init(vao);
+  return mesh;
 }

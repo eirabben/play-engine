@@ -1,10 +1,12 @@
 #include "Game.hpp"
 #include <iostream>
+#include <vector>
 #define GLFW_INCLUDE_GLCOREARB
 #include <GLFW/glfw3.h>
-#include "../Graphics/ModelLoader.hpp"
+#include "../Graphics/MeshLoader.hpp"
 #include "../Graphics/TextureLoader.hpp"
-#include <vector>
+#include "../Graphics/Mesh.hpp"
+#include "../Graphics/Texture.hpp"
 
 void Game::load()
 {
@@ -23,11 +25,13 @@ void Game::load()
     1, 2, 3  // second triangle
   };
 
-  ModelLoader modelLoader;
-  mModel = modelLoader.loadModel(vertices, indices);
+  MeshLoader meshLoader;
+  Mesh mesh = meshLoader.loadMesh(vertices, indices);
 
   TextureLoader textureLoader;
-  mTexture = textureLoader.loadTexture("res/Textures/container.jpg");
+  Texture texture = textureLoader.loadTexture("res/Textures/container.jpg");
+
+  mModel.init(mesh, texture);
 }
 
 void Game::update(double dt)
@@ -38,8 +42,6 @@ void Game::update(double dt)
 void Game::draw()
 {
   mShader.use();
-
-  glBindTexture(GL_TEXTURE_2D, mTexture.getId());
 
   mRenderer.render(mModel);
 }

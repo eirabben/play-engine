@@ -1,11 +1,17 @@
 #include "Model.hpp"
 
-void Model::init(unsigned int vao)
+void Model::init(Mesh mesh, Texture texture)
 {
-  mVao = vao;
+  mMesh = mesh;
+  mTexture = texture;
 }
 
-unsigned int Model::getVao()
+Mesh& Model::getMesh()
 {
-  return mVao;
+  return mMesh;
+}
+
+Texture& Model::getTexture()
+{
+  return mTexture;
 }

@@ -1,13 +1,17 @@
 #pragma once
+#include "Mesh.hpp"
+#include "Texture.hpp"
 
 class Model
 {
 public:
-  void init(unsigned int vao);
+  void init(Mesh mesh, Texture texture);
 
-  unsigned int getVao();
+  Mesh& getMesh();
+  Texture& getTexture();
 
 private:
-  unsigned int mVao;
+  Mesh mMesh;
+  Texture mTexture;
 
 };

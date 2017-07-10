@@ -2,6 +2,7 @@
 #include "../Graphics/Shader.hpp"
 #include "../Graphics/Renderer.hpp"
 #include "../Graphics/Model.hpp"
+#include "../Graphics/Camera.hpp"
 
 class Game
 {

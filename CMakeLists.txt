@@ -16,6 +16,7 @@ add_executable(engine
   src/Graphics/Shader.cpp
   src/Graphics/MeshLoader.cpp
   src/Graphics/Mesh.cpp
+  src/Graphics/Camera.cpp
   src/Graphics/Model.cpp
   src/Graphics/Renderer.cpp
   src/Graphics/Texture.cpp

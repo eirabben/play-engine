@@ -17,6 +17,8 @@ add_executable(engine
   src/Graphics/ModelLoader.cpp
   src/Graphics/Model.cpp
   src/Graphics/Renderer.cpp
+  src/Graphics/Texture.cpp
+  src/Graphics/TextureLoader.cpp
 )
 
 target_include_directories(engine PUBLIC ${CMAKE_SOURCE_DIR}/lib/include)

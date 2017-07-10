@@ -1,6 +1,8 @@
 #pragma once
 #include "../Graphics/Shader.hpp"
 #include "../Graphics/Renderer.hpp"
+#include "../Graphics/Model.hpp"
+#include "../Graphics/Texture.hpp"
 
 class Game
 {
@@ -15,6 +17,7 @@ public:
 private:
   Shader mShader;
   Renderer mRenderer;
-  Model model;
+  Model mModel;
+  Texture texture;
 
 };

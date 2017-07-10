@@ -8,14 +8,16 @@ void Window::create(int width, int height, std::string title)
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
   glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-  mWindow = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
-  if (!mWindow)
+  mWindow = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
+  if (mWindow == NULL)
   {
     // LogManager::error( "Failed to create GLFW window.");
   }
 
   glfwMakeContextCurrent(mWindow);
-  glfwSwapInterval(1);
+  glfwSetFramebufferSizeCallback(mWindow, framebufferSizeCallback);
+
+  /* glfwSwapInterval(1); */
 
   /* glfwSetInputMode(mWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED); */
   /* glfwSetCursorPos(mWindow, 0, 0); */
@@ -26,6 +28,11 @@ void Window::create(int width, int height, std::string title)
 
   // glEnable(GL_DEPTH_TEST);
   // glDepthFunc(GL_LESS);
+}
+
+void Window::framebufferSizeCallback(GLFWwindow* window, int width, int height)
+{
+  glViewport(0, 0, width, height);
 }
 
 void Window::swapBuffers()

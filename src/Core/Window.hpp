@@ -6,6 +6,7 @@ class Window
 {
 public:
   void create(int width, int height, std::string title);
+  static void framebufferSizeCallback(GLFWwindow* window, int width, int height);
   void swapBuffers();
   bool shouldClose();
   void destroy();

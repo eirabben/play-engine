@@ -1,56 +1,31 @@
 #include "ModelLoader.hpp"
-#include "Model.hpp"
 #define GLFW_INCLUDE_GLCOREARB
 #include <GLFW/glfw3.h>
 
-void ModelLoader::loadModel(Model& model, std::vector<float> vertices)
+Model ModelLoader::loadModel(std::vector<float> vertices, std::vector<unsigned int> indices)
 {
-  unsigned int vao = createVao();
-  storeAttribData(0, vertices);
-  unbindVao();
+  unsigned int vao, vbo, ebo;
 
-  model.init(vao, vertices.size() / 3);
-}
-
-void ModelLoader::cleanUp()
-{
-  for (auto vao : mVaos)
-  {
-    // glDeleteVertexArrays(&vao);
-  }
-
-  for (auto &vbo : mVbos)
-  {
-    // glDeleteBuffers(&vbo);
-  }
-}
-
-unsigned int ModelLoader::createVao()
-{
-  unsigned int vao;
   glGenVertexArrays(1, &vao);
-
-  mVaos.push_back(vao);
+  glGenBuffers(1, &vbo);
+  glGenBuffers(1, &ebo);
 
   glBindVertexArray(vao);
-  return vao;
-}
-
-void ModelLoader::storeAttribData(int index, std::vector<float> data)
-{
-  unsigned int vbo;
-  glGenBuffers(1, &vbo);
-  mVbos.push_back(vbo);
 
   glBindBuffer(GL_ARRAY_BUFFER, vbo);
-  glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(float), &data[0], GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), &vertices[0], GL_STATIC_DRAW);
+
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
 
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+  glEnableVertexAttribArray(0);
 
   glBindBuffer(GL_ARRAY_BUFFER, 0);
-}
 
-void ModelLoader::unbindVao()
-{
   glBindVertexArray(0);
+
+  Model model;
+  model.init(vao);
+  return model;
 }

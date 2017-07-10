@@ -7,22 +7,22 @@
 class Shader
 {
 public:
-    void compileShaders(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
-    void compileShader(GLuint shaderID, const GLchar* shaderSource);
-    void linkShaders(GLuint vertexShaderID, GLuint fragmentShaderID);
-    std::string loadSourceFromFile(const std::string& shaderPath);
+  void init(std::string vertexShaderPath, std::string fragmentShaderPath);
 
-    GLint getUniformLocation(const std::string& uniformName) const;
-    void loadUniform(GLint location, int data);
-    void loadUniform(GLint location, float data);
-    void loadUniform(GLint location, glm::vec2 data);
-    void loadUniform(GLint location, glm::vec3 data);
-    void loadUniform(GLint location, glm::mat4 data);
+  void use();
 
-    void use();
-    void unuse();
+  int getUniformLocation(const std::string& name);
+  void setBool(const std::string& name, bool value);
+  void setInt(const std::string& name, int value);
+  void setFloat(const std::string& name, float value);
+  void setVec2(const std::string& name, glm::vec2 value);
+  void setVec3(const std::string& name, glm::vec3 value);
+  void setMat4(const std::string& name, glm::mat4 value);
 
 private:
-    GLuint program;
+  unsigned int mId;
 
+  std::string loadShader(std::string path);
+  void compileShader(unsigned int id, const char* source);
+  void linkProgram(unsigned int vertexShader, unsigned int fragmentShader);
 };

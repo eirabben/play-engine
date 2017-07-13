@@ -37,6 +37,14 @@ void Camera::updatePosition(CameraMovement direction, double deltaTime)
   {
     mPosition += mRight * velocity;
   }
+  if (direction == UP)
+  {
+    mPosition += mWorldUp * velocity;
+  }
+  if (direction == DOWN)
+  {
+    mPosition -= mWorldUp * velocity;
+  }
 }
 
 void Camera::updateViewDirection(float xOffset, float yOffset, bool constrainPitch)
@@ -83,7 +91,7 @@ void Camera::updateCameraVectors()
   glm::vec3 front;
   front.x = cos(glm::radians(mYaw)) * cos(glm::radians(mPitch));
   front.y = sin(glm::radians(mPitch));
-  front.z = cos(glm::radians(mYaw)) * cos(glm::radians(mPitch));
+  front.z = sin(glm::radians(mYaw)) * cos(glm::radians(mPitch));
   mFront = glm::normalize(front);
 
   mRight = glm::normalize(glm::cross(mFront, mWorldUp));

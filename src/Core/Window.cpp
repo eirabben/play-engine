@@ -1,6 +1,6 @@
 #include "Window.hpp"
 #include <iostream>
-#include "Engine.hpp"
+#include "Game.hpp"
 
 void Window::create(int width, int height, std::string title)
 {
@@ -19,10 +19,10 @@ void Window::create(int width, int height, std::string title)
   glfwMakeContextCurrent(mWindow);
   glfwSetFramebufferSizeCallback(mWindow, framebufferSizeCallback);
 
-  /* glfwSwapInterval(1); */
+  glfwSwapInterval(1);
 
-  /* glfwSetInputMode(mWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED); */
-  /* glfwSetCursorPos(mWindow, 0, 0); */
+  glfwSetInputMode(mWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+  glfwSetCursorPos(mWindow, 0, 0);
 
   int bufferWidth, bufferHeight;
   glfwGetFramebufferSize(mWindow, &bufferWidth, &bufferHeight);
@@ -52,9 +52,9 @@ void Window::destroy()
   glfwDestroyWindow(mWindow);
 }
 
-void Window::setWindowUserPointer(Engine* engine)
+void Window::setWindowUserPointer(Game& game)
 {
-  glfwSetWindowUserPointer(mWindow, engine);
+  glfwSetWindowUserPointer(mWindow, &game);
 
   glfwSetKeyCallback(mWindow, keyCallback);
   glfwSetCursorPosCallback(mWindow, cursorPosCallback);
@@ -63,18 +63,18 @@ void Window::setWindowUserPointer(Engine* engine)
 
 void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-  Engine* engine = reinterpret_cast<Engine*>(glfwGetWindowUserPointer(window));
-  engine->handleInput(key, scancode, action, mods);
+  Game* game = reinterpret_cast<Game*>(glfwGetWindowUserPointer(window));
+  game->handleInput(key, scancode, action, mods);
 }
 
 void Window::cursorPosCallback(GLFWwindow* window, double xPos, double yPos)
 {
-  Engine* engine = reinterpret_cast<Engine*>(glfwGetWindowUserPointer(window));
-  engine->handleMouse(xPos, yPos);
+  Game* game = reinterpret_cast<Game*>(glfwGetWindowUserPointer(window));
+  game->handleMouse(xPos, yPos);
 }
 
 void Window::scrollCallback(GLFWwindow* window, double xOffset, double yOffset)
 {
-  Engine* engine = reinterpret_cast<Engine*>(glfwGetWindowUserPointer(window));
-  engine->handleScroll(xOffset, yOffset);
+  Game* game = reinterpret_cast<Game*>(glfwGetWindowUserPointer(window));
+  game->handleScroll(xOffset, yOffset);
 }

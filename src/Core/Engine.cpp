@@ -9,14 +9,9 @@ void Engine::boot()
   }
 
   mWindow.create(1280, 720, "PlayEngine");
-  mWindow.setWindowUserPointer(this);
+  mWindow.setWindowUserPointer(mGame);
 
   mGame.load();
-
-  mInput.addAction("JUMP", []() { std::cout << "JUMPING\n"; });
-  mInput.bindKeyPress(GLFW_KEY_W, "JUMP");
-  mInput.bindKeyRelease(GLFW_KEY_S, "STOP");
-  mInput.bindKeyDown(GLFW_KEY_A, "JUMP");
 
   loop();
 }
@@ -36,7 +31,6 @@ void Engine::loop()
     glfwPollEvents();
     while (lag >= msPerUpdate)
     {
-      mInput.update();
       mGame.update(msPerUpdate);
       lag -= msPerUpdate;
     }
@@ -52,28 +46,5 @@ void Engine::shutdown()
   mGame.quit();
   mWindow.destroy();
   glfwTerminate();
-}
-
-void Engine::handleInput(int key, int scancode, int action, int mods)
-{
-  if (action == GLFW_PRESS)
-  {
-    mInput.keyPressed(key);
-  }
-
-  if (action == GLFW_RELEASE)
-  {
-    mInput.keyReleased(key);
-  }
-}
-
-void Engine::handleMouse(double xPos, double yPos)
-{
-  mInput.mouseMoved(xPos, yPos);
-}
-
-void Engine::handleScroll(double xOffset, double yOffset)
-{
-  mInput.wheelMoved(xOffset, yOffset);
 }
 

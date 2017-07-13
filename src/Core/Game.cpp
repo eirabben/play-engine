@@ -80,22 +80,40 @@ void Game::load()
   Texture texture = textureLoader.loadTexture("res/Textures/container.jpg");
 
   mModel.init(cube, texture);
+
+  mInput.addAction("MOVE_FORWARD", [this](double dt) {
+    mCamera.updatePosition(CameraMovement::FORWARD, dt);
+  });
+  mInput.addAction("MOVE_BACKWARD", [this](double dt) {
+    mCamera.updatePosition(CameraMovement::BACKWARD, dt);
+  });
+  mInput.addAction("MOVE_LEFT", [this](double dt) {
+    mCamera.updatePosition(CameraMovement::LEFT, dt);
+  });
+  mInput.addAction("MOVE_RIGHT", [this](double dt) {
+    mCamera.updatePosition(CameraMovement::RIGHT, dt);
+  });
+  mInput.addAction("MOVE_UP", [this](double dt) {
+    mCamera.updatePosition(CameraMovement::UP, dt);
+  });
+  mInput.addAction("MOVE_DOWN", [this](double dt) {
+    mCamera.updatePosition(CameraMovement::DOWN, dt);
+  });
+
+  mInput.bindKeyDown(GLFW_KEY_W, "MOVE_FORWARD");
+  mInput.bindKeyDown(GLFW_KEY_S, "MOVE_BACKWARD");
+  mInput.bindKeyDown(GLFW_KEY_A, "MOVE_LEFT");
+  mInput.bindKeyDown(GLFW_KEY_D, "MOVE_RIGHT");
+  mInput.bindKeyDown(GLFW_KEY_LEFT_SHIFT, "MOVE_UP");
+  mInput.bindKeyDown(GLFW_KEY_LEFT_CONTROL, "MOVE_DOWN");
+  mInput.bindMouseMove([this](double x, double y, double offsetX, double offsetY) {
+      mCamera.updateViewDirection(offsetX, offsetY);
+  });
 }
 
 void Game::update(double dt)
 {
-  /* if (input.isKeyDown(GLFW_KEY_W)) { */
-  /*   mCamera.updatePosition(CameraMovement::FORWARD, dt); */
-  /* } */
-  /* if (input.isKeyDown(GLFW_KEY_S)) { */
-  /*   mCamera.updatePosition(CameraMovement::BACKWARD, dt); */
-  /* } */
-  /* if (input.isKeyDown(GLFW_KEY_A)) { */
-  /*   mCamera.updatePosition(CameraMovement::LEFT, dt); */
-  /* } */
-  /* if (input.isKeyDown(GLFW_KEY_D)) { */
-  /*   mCamera.updatePosition(CameraMovement::RIGHT, dt); */
-  /* } */
+  mInput.update(dt);
 }
 
 void Game::draw()
@@ -106,5 +124,28 @@ void Game::draw()
 void Game::quit()
 {
   
+}
+
+void Game::handleInput(int key, int scancode, int action, int mods)
+{
+  if (action == GLFW_PRESS)
+  {
+    mInput.keyPressed(key);
+  }
+
+  if (action == GLFW_RELEASE)
+  {
+    mInput.keyReleased(key);
+  }
+}
+
+void Game::handleMouse(double x, double y)
+{
+  mInput.mouseMoved(x, y);
+}
+
+void Game::handleScroll(double offsetX, double offsetY)
+{
+  mInput.wheelMoved(offsetX, offsetY);
 }
 

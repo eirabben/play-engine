@@ -24,22 +24,39 @@ void Input::keyReleased(int key)
   }
 }
 
-void Input::mouseMoved(double xPos, double yPos)
+void Input::mouseMoved(double x, double y)
+{
+  if (mFirstMouse)
+  {
+    mMouseX = x;
+    mMouseY = y;
+    mFirstMouse = false;
+  }
+
+  double offsetX = x - mMouseX;
+  double offsetY = mMouseY - y; // y-coordinates go from bottom to top
+
+  if (mMouseMoveBinding)
+  {
+    mMouseMoveBinding(x, y, offsetX, offsetY);
+  }
+
+  mMouseX = x;
+  mMouseY = y;
+}
+
+void Input::wheelMoved(double offsetX, double offsetY)
 {
 }
 
-void Input::wheelMoved(double xOffset, double yOffset)
-{
-}
-
-void Input::update()
+void Input::update(double dt)
 {
   for (auto& binding : mKeyDownBindings)
   {
     auto key = mKeysDown.find(binding.first);
     if (key != mKeysDown.end())
     {
-      callAction(binding.second);
+      callTimedAction(binding.second, dt);
     }
   }
 }
@@ -47,6 +64,11 @@ void Input::update()
 void Input::addAction(std::string name, std::function<void()> action)
 {
   mActions[name] = action;
+}
+
+void Input::addAction(std::string name, std::function<void(double)> action)
+{
+  mTimedActions[name] = action;
 }
 
 void Input::bindKeyPress(int key, std::string action)
@@ -64,12 +86,26 @@ void Input::bindKeyDown(int key, std::string action)
   mKeyDownBindings[key] = action;
 }
 
+void Input::bindMouseMove(std::function<void(double, double, double, double)> action)
+{
+  mMouseMoveBinding = action;
+}
+
 void Input::callAction(std::string name)
 {
   auto action = mActions.find(name);
   if (action != mActions.end())
   {
     mActions[name]();
+  }
+}
+
+void Input::callTimedAction(std::string name, double dt)
+{
+  auto action = mTimedActions.find(name);
+  if (action != mTimedActions.end())
+  {
+    mTimedActions[name](dt);
   }
 }
 

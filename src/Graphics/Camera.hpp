@@ -6,13 +6,16 @@ enum CameraMovement
   FORWARD,
   BACKWARD,
   LEFT,
-  RIGHT
+  RIGHT,
+  UP,
+  DOWN
 };
 
 class Camera
 {
 public:
   void init(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f));
+  void update(double dt);
 
   glm::mat4 getViewMatrix();
   float getZoom();

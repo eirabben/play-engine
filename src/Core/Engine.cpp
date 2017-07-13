@@ -1,35 +1,22 @@
 #include "Engine.hpp"
+#include <iostream>
 
 void Engine::boot()
 {
-  // glfwSetErrorCallback(LogManager::glfwError);
-
   if (!glfwInit())
   {
-    // LogManager::error("Failed to initialize GLFW.");
+    std::cout << "Failed to initialize GLFW.\n";
   }
 
-  // sol::state lua;
-  // lua.open_libraries(sol::lib::base, sol::lib::package);
-  // lua["game"] = lua.create_table_with();
-  // sol::table t = lua.create_table_with(
-  //   "window", lua.create_table_with(
-  //     "title", "PlayEngine",
-  //     "width", 800,
-  //     "height", 600
-  //   )
-  // );
-  // sol::load_result conf = lua.load_file("game/conf.lua");
-  // if (conf)
-  // {
-  //   conf();
-  //   lua["game"]["conf"](t);
-  // }
-
   mWindow.create(1280, 720, "PlayEngine");
-  // mWindow.setWindowUserPointer(mGame);
+  mWindow.setWindowUserPointer(this);
 
   mGame.load();
+
+  mInput.addAction("JUMP", []() { std::cout << "JUMPING\n"; });
+  mInput.bindKeyPress(GLFW_KEY_W, "JUMP");
+  mInput.bindKeyRelease(GLFW_KEY_S, "STOP");
+  mInput.bindKeyDown(GLFW_KEY_A, "JUMP");
 
   loop();
 }
@@ -49,6 +36,7 @@ void Engine::loop()
     glfwPollEvents();
     while (lag >= msPerUpdate)
     {
+      mInput.update();
       mGame.update(msPerUpdate);
       lag -= msPerUpdate;
     }
@@ -65,3 +53,27 @@ void Engine::shutdown()
   mWindow.destroy();
   glfwTerminate();
 }
+
+void Engine::handleInput(int key, int scancode, int action, int mods)
+{
+  if (action == GLFW_PRESS)
+  {
+    mInput.keyPressed(key);
+  }
+
+  if (action == GLFW_RELEASE)
+  {
+    mInput.keyReleased(key);
+  }
+}
+
+void Engine::handleMouse(double xPos, double yPos)
+{
+  mInput.mouseMoved(xPos, yPos);
+}
+
+void Engine::handleScroll(double xOffset, double yOffset)
+{
+  mInput.wheelMoved(xOffset, yOffset);
+}
+

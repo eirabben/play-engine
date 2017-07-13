@@ -4,6 +4,8 @@
 #include "../Graphics/Model.hpp"
 #include "../Graphics/Camera.hpp"
 
+/* class Input; */
+
 class Game
 {
 public:
@@ -12,11 +14,10 @@ public:
   void draw();
   void quit();
 
-  void handleInput();
-
 private:
   Shader mShader;
   Renderer mRenderer;
   Model mModel;
+  Camera mCamera;
 
 };

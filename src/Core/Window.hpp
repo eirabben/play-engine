@@ -2,6 +2,8 @@
 #include <string>
 #include <GLFW/Glfw3.h>
 
+class Engine;
+
 class Window
 {
 public:
@@ -11,8 +13,10 @@ public:
   bool shouldClose();
   void destroy();
 
-  // void setWindowUserPointer(Game& game);
-  // static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+  void setWindowUserPointer(Engine* engine);
+  static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+  static void cursorPosCallback(GLFWwindow* window, double xPos, double yPos);
+  static void scrollCallback(GLFWwindow* window, double xOffset, double yOffset);
 
 private:
   GLFWwindow* mWindow;

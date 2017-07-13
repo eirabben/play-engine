@@ -15,3 +15,8 @@ Texture& Model::getTexture()
 {
   return mTexture;
 }
+
+glm::mat4 Model::getModelMatrix()
+{
+  return mModelMatrix;
+}

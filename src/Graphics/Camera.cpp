@@ -12,6 +12,11 @@ glm::mat4 Camera::getViewMatrix()
   return glm::lookAt(mPosition, mPosition + mFront, mUp);
 }
 
+float Camera::getZoom()
+{
+  return mZoom;
+}
+
 void Camera::updatePosition(CameraMovement direction, double deltaTime)
 {
   float velocity = mMovementSpeed * deltaTime;
@@ -34,7 +39,7 @@ void Camera::updatePosition(CameraMovement direction, double deltaTime)
   }
 }
 
-void Camera::updateViewDirection(float xOffset, float yOffset, bool constrainPitch = true)
+void Camera::updateViewDirection(float xOffset, float yOffset, bool constrainPitch)
 {
   xOffset *= mMouseSensitivity;
   yOffset *= mMouseSensitivity;

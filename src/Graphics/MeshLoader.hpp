@@ -5,7 +5,8 @@
 class MeshLoader
 {
 public:
-  Mesh loadMesh(std::vector<float> vertices, std::vector<unsigned int> indices);
+  Mesh loadMesh(std::vector<float> vertices);
+  /* Mesh loadMesh(std::vector<float> vertices, std::vector<unsigned int> indices); */
 
 private:
 

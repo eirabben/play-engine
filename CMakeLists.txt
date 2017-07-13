@@ -13,6 +13,7 @@ add_executable(engine
   src/Core/Engine.cpp
   src/Core/Window.cpp
   src/Core/Game.cpp
+  src/Core/Input.cpp
   src/Graphics/Shader.cpp
   src/Graphics/MeshLoader.cpp
   src/Graphics/Mesh.cpp

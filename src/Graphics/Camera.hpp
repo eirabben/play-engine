@@ -15,9 +15,10 @@ public:
   void init(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f));
 
   glm::mat4 getViewMatrix();
+  float getZoom();
 
   void updatePosition(CameraMovement direction, double deltaTime);
-  void updateViewDirection(float xOffset, float yOffset, bool constrainPitch);
+  void updateViewDirection(float xOffset, float yOffset, bool constrainPitch = true);
   void updateZoom(float yOffset);
 
 

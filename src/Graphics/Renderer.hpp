@@ -1,10 +1,12 @@
 #pragma once
 #include "Model.hpp"
+#include "Camera.hpp"
+#include "Shader.hpp"
 
 class Renderer
 {
 public:
-  void render(Model& model);
+  void render(Camera& camera, Shader& shader, Model& model);
 
 private:
 

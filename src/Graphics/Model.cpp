@@ -1,9 +1,9 @@
 #include "Model.hpp"
 
-void Model::init(Mesh mesh, Texture texture)
+void Model::init(Mesh mesh, Material material)
 {
   mMesh = mesh;
-  mTexture = texture;
+  mMaterial = material;
 }
 
 Mesh& Model::getMesh()
@@ -11,9 +11,9 @@ Mesh& Model::getMesh()
   return mMesh;
 }
 
-Texture& Model::getTexture()
+Material& Model::getMaterial()
 {
-  return mTexture;
+  return mMaterial;
 }
 
 glm::mat4 Model::getModelMatrix()

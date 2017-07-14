@@ -20,6 +20,8 @@ add_executable(engine
   src/Graphics/Camera.cpp
   src/Graphics/Model.cpp
   src/Graphics/Renderer.cpp
+  src/Graphics/Light.cpp
+  src/Graphics/Material.cpp
   src/Graphics/Texture.cpp
   src/Graphics/TextureLoader.cpp
 )

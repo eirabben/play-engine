@@ -18,6 +18,7 @@ public:
   void update(double dt);
 
   glm::mat4 getViewMatrix();
+  glm::vec3 getPosition();
   float getZoom();
 
   void updatePosition(CameraMovement direction, double deltaTime);

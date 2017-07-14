@@ -1,20 +1,20 @@
 #pragma once
 #include <glm/glm.hpp>
 #include "Mesh.hpp"
-#include "Texture.hpp"
+#include "Material.hpp"
 
 class Model
 {
 public:
-  void init(Mesh mesh, Texture texture);
+  void init(Mesh mesh, Material material);
 
   Mesh& getMesh();
-  Texture& getTexture();
+  Material& getMaterial();
   glm::mat4 getModelMatrix();
 
 private:
   Mesh mMesh;
-  Texture mTexture;
+  Material mMaterial;
   glm::mat4 mModelMatrix;
 
 };

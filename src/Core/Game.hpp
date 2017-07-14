@@ -1,9 +1,10 @@
 #pragma once
+#include "Input.hpp"
 #include "../Graphics/Shader.hpp"
 #include "../Graphics/Renderer.hpp"
 #include "../Graphics/Model.hpp"
 #include "../Graphics/Camera.hpp"
-#include "Input.hpp"
+#include "../Graphics/Light.hpp"
 
 class Game
 {
@@ -20,8 +21,11 @@ public:
 private:
   Input mInput;
   Shader mShader;
-  Renderer mRenderer;
-  Model mModel;
   Camera mCamera;
+  Renderer mRenderer;
+
+  Model mModel;
+  DirectionalLight mDirLight;
+  PointLight mPointLight;
 
 };

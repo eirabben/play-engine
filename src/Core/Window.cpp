@@ -67,14 +67,14 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
   game->handleInput(key, scancode, action, mods);
 }
 
-void Window::cursorPosCallback(GLFWwindow* window, double xPos, double yPos)
+void Window::cursorPosCallback(GLFWwindow* window, double x, double y)
 {
   Game* game = reinterpret_cast<Game*>(glfwGetWindowUserPointer(window));
-  game->handleMouse(xPos, yPos);
+  game->handleMouse(x, y);
 }
 
-void Window::scrollCallback(GLFWwindow* window, double xOffset, double yOffset)
+void Window::scrollCallback(GLFWwindow* window, double offsetX, double offsetY)
 {
   Game* game = reinterpret_cast<Game*>(glfwGetWindowUserPointer(window));
-  game->handleScroll(xOffset, yOffset);
+  game->handleScroll(offsetX, offsetY);
 }

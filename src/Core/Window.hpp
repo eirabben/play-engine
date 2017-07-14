@@ -15,8 +15,8 @@ public:
 
   void setWindowUserPointer(Game& game);
   static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
-  static void cursorPosCallback(GLFWwindow* window, double xPos, double yPos);
-  static void scrollCallback(GLFWwindow* window, double xOffset, double yOffset);
+  static void cursorPosCallback(GLFWwindow* window, double x, double y);
+  static void scrollCallback(GLFWwindow* window, double offsetX, double offsetY);
 
 private:
   GLFWwindow* mWindow;
